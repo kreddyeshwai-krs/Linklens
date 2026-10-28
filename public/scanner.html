@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Intelligence Lab — Link Lens</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="brand-logo">
+          <div class="brand-icon">🔍</div>
+          <span>Link Lens</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Tools</div>
+        <a href="/dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/scanner.html" class="nav-link active">
+          <span class="nav-icon">🔬</span>
+          <span>URL Intelligence Lab</span>
+        </a>
+        <a href="/history.html" class="nav-link">
+          <span class="nav-icon">📜</span>
+          <span>Scan History</span>
+        </a>
+
+        <div class="nav-section-title">Learning & Practice</div>
+        <a href="/simulator.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Red Flag Simulator</span>
+        </a>
+        <a href="/quiz.html" class="nav-link">
+          <span class="nav-icon">📝</span>
+          <span>Quizzes & Assessment</span>
+        </a>
+        <a href="/progress.html" class="nav-link">
+          <span class="nav-icon">🏆</span>
+          <span>My Progress & Badges</span>
+        </a>
+
+        <div id="nav-admin-link" style="display: none; flex-direction: column;">
+          <div class="nav-section-title">Administration</div>
+          <a href="/admin.html" class="nav-link">
+            <span class="nav-icon">⚙️</span>
+            <span>Admin Center</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+          Ruleset Engine v1.2.0
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-content">
+      <header class="app-header">
+        <div class="header-left">
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle navigation menu">☰</button>
+          <span style="font-weight: 700; color: var(--text-secondary); font-size: 0.95rem;">URL Intelligence Lab</span>
+        </div>
+        <div class="header-right">
+          <button id="theme-toggle-btn" class="btn btn-sm btn-outline" style="padding: 0.4rem;" aria-label="Toggle theme">☀️</button>
+          <div id="header-user-badge"></div>
+        </div>
+      </header>
+
+      <main class="container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">URL Intelligence Lab</h1>
+            <p class="page-subtitle">Submit any web link for deterministic syntactic inspection, typosquatting checks, and red flag extraction.</p>
+          </div>
+        </div>
+
+        <!-- URL Input Card -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-body">
+            <form id="url-scan-form">
+              <div class="form-group">
+                <label class="form-label" for="scan-url-input">Enter Target URL to Analyze</label>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                  <input id="scan-url-input" class="form-control mono-font" type="url" placeholder="https://secure-login.chase.example.com/auth" required style="flex: 1; min-width: 280px;">
+                  <button type="submit" id="scan-submit-btn" class="btn btn-primary" style="min-width: 160px;">Inspect URL</button>
+                </div>
+                <span class="form-hint">URL credentials and sensitive query tokens (e.g. token, password) will be automatically redacted before persistence.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="scan-loading-indicator" class="card" style="display: none; padding: 3rem; text-align: center; margin-bottom: 2rem;">
+          <div style="font-size: 2rem; margin-bottom: 1rem;">⚙️</div>
+          <h3>Performing Structural Inspection...</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Evaluating Public Suffix List boundaries, visual typosquatting, and parameter redirects.</p>
+        </div>
+
+        <!-- Scan Results Container -->
+        <div id="scan-results-container" style="display: none;">
+          <!-- Top Assessment Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+            <!-- Risk Dial Card -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">🛡️ Risk Score Assessment</h3>
+                <span id="result-ruleset" class="badge badge-neutral">v1.2.0</span>
+              </div>
+              <div class="card-body" id="result-risk-dial"></div>
+              <div class="card-footer" style="justify-content: center;">
+                <a id="view-full-report-btn" href="#" class="btn btn-sm btn-outline">📄 Generate Printable Report</a>
+              </div>
+            </div>
+
+            <!-- Metadata Card -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">🌐 Structural Metadata</h3>
+              </div>
+              <div class="card-body" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div>
+                  <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Normalized Hostname</span>
+                  <p><strong id="result-hostname" class="mono-font" style="font-size: 1.05rem;">-</strong></p>
+                </div>
+                <div>
+                  <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Registrable Domain (PSL)</span>
+                  <p><strong id="result-domain" class="mono-font">-</strong></p>
+                </div>
+                <div>
+                  <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Confidence / Evidence Quality</span>
+                  <p><strong id="result-confidence">-</strong></p>
+                </div>
+                <div>
+                  <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Threat Intelligence Feed</span>
+                  <p id="result-intel-status" style="font-size: 0.88rem; color: var(--text-secondary);">-</p>
+                </div>
+                <div>
+                  <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Sanitized & Redacted URL</span>
+                  <p class="mono-font" id="result-redacted-url" style="font-size: 0.8rem; word-break: break-all; color: var(--text-muted); background: var(--bg-primary); padding: 0.4rem; border-radius: var(--radius-sm);">-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Red Flag Findings Breakdown -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+              <h3 class="card-title">⚠️ Identified Red Flag Findings</h3>
+            </div>
+            <div class="card-body">
+              <div id="result-findings-list" class="findings-list"></div>
+            </div>
+          </div>
+
+          <!-- Mitigating / Educational Notices -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+              <h3 class="card-title">ℹ️ Mitigating & Transport Observations</h3>
+            </div>
+            <div class="card-body">
+              <div id="result-positive-list" class="findings-list"></div>
+            </div>
+          </div>
+
+          <!-- Next Steps & Limitations -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div class="card" style="border-left: 4px solid var(--accent-cyan);">
+              <div class="card-body">
+                <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">Recommended Next Steps</h4>
+                <ul id="result-next-steps" style="padding-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary);"></ul>
+              </div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--status-warning);">
+              <div class="card-body">
+                <h4 style="color: var(--status-warning); margin-bottom: 0.5rem;">Analysis Limitations</h4>
+                <ul style="padding-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary);">
+                  <li>Inspection evaluates URL syntax, domain registration structure, and threat feeds.</li>
+                  <li>Page scripts were not downloaded or executed to prevent arbitrary malware execution.</li>
+                  <li>A score under 25 indicates low observed risk, not an absolute guarantee of safety.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/scanner.js"></script>
+</body>
+</html>
+

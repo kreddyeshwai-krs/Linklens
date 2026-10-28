@@ -1,0 +1,109 @@
+/* Link Lens Design Tokens & Theme Variables */
+:root {
+  /* Default Dark Theme (Cybersecurity SOC Palette) */
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f293d;
+  --bg-card: #151e2e;
+  --bg-card-hover: #1c273c;
+  --bg-input: #0d1422;
+  --border-subtle: #1e293b;
+  --border-focus: #06b6d4;
+
+  /* Typography Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0a0e17;
+
+  /* Brand Accents */
+  --accent-cyan: #06b6d4;
+  --accent-cyan-hover: #0891b2;
+  --accent-cyan-subtle: rgba(6, 182, 212, 0.12);
+  --accent-blue: #3b82f6;
+
+  /* Semantic Risk Colors */
+  --risk-low: #10b981;
+  --risk-low-bg: rgba(16, 185, 129, 0.12);
+  --risk-low-border: rgba(16, 185, 129, 0.3);
+
+  --risk-moderate: #f59e0b;
+  --risk-moderate-bg: rgba(245, 158, 11, 0.12);
+  --risk-moderate-border: rgba(245, 158, 11, 0.3);
+
+  --risk-high: #f97316;
+  --risk-high-bg: rgba(249, 115, 22, 0.12);
+  --risk-high-border: rgba(249, 115, 22, 0.3);
+
+  --risk-critical: #ef4444;
+  --risk-critical-bg: rgba(239, 68, 68, 0.12);
+  --risk-critical-border: rgba(239, 68, 68, 0.3);
+
+  /* Status Colors */
+  --status-info: #0ea5e9;
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
+
+  /* Shadows & Elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+
+  /* Layout Tokens */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --sidebar-width: 260px;
+  --header-height: 68px;
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.25s ease-in-out;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-input: #ffffff;
+  --border-subtle: #cbd5e1;
+  --border-focus: #0284c7;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-inverse: #f8fafc;
+
+  --accent-cyan: #0284c7;
+  --accent-cyan-hover: #0369a1;
+  --accent-cyan-subtle: rgba(2, 132, 199, 0.1);
+  --accent-blue: #2563eb;
+
+  --risk-low: #059669;
+  --risk-low-bg: rgba(5, 150, 105, 0.1);
+  --risk-low-border: rgba(5, 150, 105, 0.3);
+
+  --risk-moderate: #d97706;
+  --risk-moderate-bg: rgba(217, 119, 6, 0.1);
+  --risk-moderate-border: rgba(217, 119, 6, 0.3);
+
+  --risk-high: #ea580c;
+  --risk-high-bg: rgba(234, 88, 12, 0.1);
+  --risk-high-border: rgba(234, 88, 12, 0.3);
+
+  --risk-critical: #dc2626;
+  --risk-critical-bg: rgba(220, 38, 38, 0.1);
+  --risk-critical-border: rgba(220, 38, 38, 0.3);
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+

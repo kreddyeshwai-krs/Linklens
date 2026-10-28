@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Link Lens</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: var(--bg-primary); padding: 1rem;">
+  <div class="card" style="max-width: 420px; width: 100%;">
+    <div class="card-header" style="text-align: center; flex-direction: column; gap: 0.5rem; padding: 2rem 1.5rem 1rem;">
+      <a href="/index.html" class="brand-logo" style="justify-content: center;">
+        <div class="brand-icon">🔍</div>
+        <span>Link Lens</span>
+      </a>
+      <h2 style="font-size: 1.35rem; margin-top: 0.5rem;">Sign In to Your Account</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">Access the URL Intelligence Lab and Simulator</p>
+    </div>
+    <div class="card-body">
+      <div id="login-error-alert" class="card" style="display: none; background-color: var(--risk-critical-bg); border-color: var(--risk-critical-border); color: var(--risk-critical); padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.88rem;"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email Address</label>
+          <input class="form-control" type="email" id="login-email" required placeholder="analyst@domain.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input class="form-control" type="password" id="login-password" required placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button type="submit" id="login-submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Sign In</button>
+      </form>
+    </div>
+    <div class="card-footer" style="justify-content: center; font-size: 0.88rem;">
+      <span>Don't have an account? <a href="/signup.html">Create an Account</a></span>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initTheme } from '/js/theme.js';
+    import { login, getCurrentUser } from '/js/auth.js';
+    import { showToast } from '/js/ui-utils.js';
+
+    initTheme();
+
+    // If already logged in, redirect to dashboard
+    getCurrentUser().then(user => {
+      if (user) window.location.href = '/dashboard.html';
+    });
+
+    const form = document.getElementById('login-form');
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+    const submitBtn = document.getElementById('login-submit-btn');
+    const errorAlert = document.getElementById('login-error-alert');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorAlert.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Verifying...';
+
+      try {
+        await login(emailInput.value.trim(), passwordInput.value);
+        showToast('Signed in successfully', 'success');
+        window.location.href = '/dashboard.html';
+      } catch (err) {
+        errorAlert.textContent = err.message || 'Invalid email or password.';
+        errorAlert.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>
+

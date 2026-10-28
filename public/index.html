@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Lens — Suspicious Management & URL Red Flag Learning Simulator</title>
+  <meta name="description" content="Educational cybersecurity platform that teaches users to identify suspicious URLs, understand phishing indicators, and make safer browsing decisions.">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header" style="position: relative;">
+    <div class="header-left">
+      <a href="/index.html" class="brand-logo">
+        <div class="brand-icon">🔍</div>
+        <span>Link Lens</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <nav style="display: flex; gap: 1rem; align-items: center;">
+        <a href="/scanner.html" class="nav-link" style="padding: 0.4rem 0.75rem;">URL Lab</a>
+        <a href="/simulator.html" class="nav-link" style="padding: 0.4rem 0.75rem;">Simulator</a>
+        <a href="/quiz.html" class="nav-link" style="padding: 0.4rem 0.75rem;">Quizzes</a>
+        <a href="/login.html" class="btn btn-sm btn-outline">Sign In</a>
+        <a href="/signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+        <button id="theme-toggle-btn" class="btn btn-sm btn-outline" style="padding: 0.4rem;" aria-label="Toggle theme">☀️</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-badge">🛡️ Explainable Cybersecurity Intelligence</div>
+      <h1 class="hero-headline">See the Red Flags Before You Click</h1>
+      <p class="hero-subtext">
+        Inspect deceptive domain structures, decode phishing mechanisms, and practice spotting cyber threats safely in controlled, realistic simulation environments.
+      </p>
+      <div class="hero-actions">
+        <a id="primary-cta-btn" href="/scanner.html" class="btn btn-primary" style="padding: 0.85rem 1.75rem; font-size: 1.05rem;">Analyze a URL</a>
+        <a href="/simulator.html" class="btn btn-secondary" style="padding: 0.85rem 1.75rem; font-size: 1.05rem;">Start Learning Simulator</a>
+      </div>
+    </section>
+
+    <!-- Sample Report Preview (Clearly Labeled Simulated Example) -->
+    <section class="container" style="margin-top: 1rem;">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div class="edu-simulation-badge">Example — Simulated Data Preview</div>
+      </div>
+      <div class="card" style="border-left: 6px solid var(--risk-critical); max-width: 900px; margin: 0 auto;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">🔍 URL Structural Inspection</h3>
+            <span class="mono-font" style="font-size: 0.85rem; color: var(--text-muted);">https://secure-chase.com.account-update.example.com/login</span>
+          </div>
+          <span class="badge badge-critical">Critical Risk (85 / 100)</span>
+        </div>
+        <div class="card-body">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Registrable Domain</span>
+              <p><strong class="mono-font">example.com</strong></p>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Subdomain Deception</span>
+              <p><strong style="color: var(--risk-critical);">secure-chase.com</strong> (Impersonating Chase)</p>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Evidence Confidence</span>
+              <p><strong>High (Deterministic Heuristic)</strong></p>
+            </div>
+          </div>
+          <div class="finding-item critical">
+            <div class="finding-header">
+              <span class="finding-title">Deceptive Subdomain Prepending</span>
+              <span class="badge badge-critical">Critical Severity</span>
+            </div>
+            <p class="finding-meta">
+              Attackers routinely insert target corporate brands into subdomains to mislead users into believing they are visiting an authentic banking institution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔬</div>
+          <h3>URL Intelligence Lab</h3>
+          <p>Submit URLs for comprehensive structural breakdown including Public Suffix List boundaries, typo-squatting edit distances, and sensitive parameter stripping.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Red Flag Learning Simulator</h3>
+          <p>Interact directly with controlled, safe educational scenarios using reserved domains to click and identify red flags with instant explanations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Explainable Risk Scores</h3>
+          <p>Transparent scoring from 0 to 100 with correlated-finding dampening, confidence levels, and educational next-action guidance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>Quizzes & Certification Progress</h3>
+          <p>Test your knowledge through server-validated assessments, earn cybersecurity proficiency badges, and track historical learning improvements.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="container" style="margin-bottom: 4rem;">
+      <div class="card" style="padding: 2.5rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">How Link Lens Works</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+          <div>
+            <div style="font-size: 1.75rem; font-weight: 900; color: var(--accent-cyan); margin-bottom: 0.5rem;">01. Validate</div>
+            <h4>Strict Sanitization</h4>
+            <p style="font-size: 0.9rem;">Input is verified, embedded credentials are stripped, and sensitive authentication parameters are securely redacted.</p>
+          </div>
+          <div>
+            <div style="font-size: 1.75rem; font-weight: 900; color: var(--accent-cyan); margin-bottom: 0.5rem;">02. Dissect</div>
+            <h4>Public Suffix List & PSL</h4>
+            <p style="font-size: 0.9rem;">The engine accurately isolates the true registrable domain from subdomains, detecting homoglyphs and typosquatting.</p>
+          </div>
+          <div>
+            <div style="font-size: 1.75rem; font-weight: 900; color: var(--accent-cyan); margin-bottom: 0.5rem;">03. Score</div>
+            <h4>Transparent Scoring</h4>
+            <p style="font-size: 0.9rem;">Heuristic rules generate an explainable risk rating without blindly executing remote code or trusting padlock icons alone.</p>
+          </div>
+          <div>
+            <div style="font-size: 1.75rem; font-weight: 900; color: var(--accent-cyan); margin-bottom: 0.5rem;">04. Educate</div>
+            <h4>Actionable Guidance</h4>
+            <p style="font-size: 0.9rem;">Every identified indicator links to concrete safety advice so learners understand why the signal matters in real scenarios.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety Disclaimer -->
+    <section class="container" style="margin-bottom: 4rem;">
+      <div class="card" style="border-left: 4px solid var(--status-warning); padding: 1.5rem; background-color: var(--bg-secondary);">
+        <h4 style="color: var(--status-warning); margin-bottom: 0.5rem;">⚠️ Safety & Heuristic Disclaimer</h4>
+        <p style="font-size: 0.88rem; line-height: 1.6;">
+          Link Lens is an educational cybersecurity simulator. Risk scores are heuristic indicators based on syntactic patterns, domain registration structure, and configured intelligence feeds. A low score indicates "no major red flags detected" rather than a guaranteed safe destination. Link Lens never opens submitted URLs in your browser and never executes arbitrary remote scripts.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-subtle); padding: 2.5rem 2rem; margin-top: auto;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 0;">
+      <div>
+        <strong style="font-size: 1.1rem; color: var(--text-primary);">Link Lens</strong>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Suspicious Management & URL Red Flag Learning Simulator</p>
+      </div>
+      <div style="display: flex; gap: 1.5rem; font-size: 0.88rem;">
+        <a href="#about">About</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="#contact">Contact Security</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/landing.js"></script>
+</body>
+</html>
+

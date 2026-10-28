@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan History — Link Lens</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="brand-logo">
+          <div class="brand-icon">🔍</div>
+          <span>Link Lens</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Tools</div>
+        <a href="/dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="nav-icon">🔬</span>
+          <span>URL Intelligence Lab</span>
+        </a>
+        <a href="/history.html" class="nav-link active">
+          <span class="nav-icon">📜</span>
+          <span>Scan History</span>
+        </a>
+
+        <div class="nav-section-title">Learning & Practice</div>
+        <a href="/simulator.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Red Flag Simulator</span>
+        </a>
+        <a href="/quiz.html" class="nav-link">
+          <span class="nav-icon">📝</span>
+          <span>Quizzes & Assessment</span>
+        </a>
+        <a href="/progress.html" class="nav-link">
+          <span class="nav-icon">🏆</span>
+          <span>My Progress & Badges</span>
+        </a>
+
+        <div id="nav-admin-link" style="display: none; flex-direction: column;">
+          <div class="nav-section-title">Administration</div>
+          <a href="/admin.html" class="nav-link">
+            <span class="nav-icon">⚙️</span>
+            <span>Admin Center</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+          Ruleset Engine v1.2.0
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-content">
+      <header class="app-header">
+        <div class="header-left">
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle navigation menu">☰</button>
+          <span style="font-weight: 700; color: var(--text-secondary); font-size: 0.95rem;">Historical Archives</span>
+        </div>
+        <div class="header-right">
+          <button id="theme-toggle-btn" class="btn btn-sm btn-outline" style="padding: 0.4rem;" aria-label="Toggle theme">☀️</button>
+          <div id="header-user-badge"></div>
+        </div>
+      </header>
+
+      <main class="container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Personal Scan History</h1>
+            <p class="page-subtitle">Search, filter, inspect, and manage your authenticated URL assessments.</p>
+          </div>
+          <div>
+            <button id="clear-history-btn" class="btn btn-danger">🗑️ Clear All History</button>
+          </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="card" style="margin-bottom: 1.5rem; padding: 1.25rem;">
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <div style="flex: 2; min-width: 250px;">
+              <input id="history-search-input" class="form-control" type="text" placeholder="Search by hostname or URL keywords...">
+            </div>
+            <div style="flex: 1; min-width: 180px;">
+              <select id="history-category-filter" class="form-control">
+                <option value="">All Risk Categories</option>
+                <option value="Low">Low Observed Risk</option>
+                <option value="Moderate">Moderate Risk</option>
+                <option value="High">High Risk</option>
+                <option value="Critical">Critical Risk</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scans Table -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Target Hostname</th>
+                  <th>Redacted Target URL</th>
+                  <th>Risk Score</th>
+                  <th>Analysis Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <tr>
+                  <td colspan="5" style="text-align: center; padding: 2rem;">Loading scan archives...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <button id="prev-page-btn" class="btn btn-sm btn-outline" disabled>&larr; Previous</button>
+            <span id="page-indicator" style="font-size: 0.88rem; color: var(--text-secondary);">Page 1 of 1</span>
+            <button id="next-page-btn" class="btn btn-sm btn-outline" disabled>Next &rarr;</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/history.js"></script>
+</body>
+</html>
+

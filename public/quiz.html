@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Quizzes — Link Lens</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="brand-logo">
+          <div class="brand-icon">🔍</div>
+          <span>Link Lens</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Tools</div>
+        <a href="/dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="nav-icon">🔬</span>
+          <span>URL Intelligence Lab</span>
+        </a>
+        <a href="/history.html" class="nav-link">
+          <span class="nav-icon">📜</span>
+          <span>Scan History</span>
+        </a>
+
+        <div class="nav-section-title">Learning & Practice</div>
+        <a href="/simulator.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Red Flag Simulator</span>
+        </a>
+        <a href="/quiz.html" class="nav-link active">
+          <span class="nav-icon">📝</span>
+          <span>Quizzes & Assessment</span>
+        </a>
+        <a href="/progress.html" class="nav-link">
+          <span class="nav-icon">🏆</span>
+          <span>My Progress & Badges</span>
+        </a>
+
+        <div id="nav-admin-link" style="display: none; flex-direction: column;">
+          <div class="nav-section-title">Administration</div>
+          <a href="/admin.html" class="nav-link">
+            <span class="nav-icon">⚙️</span>
+            <span>Admin Center</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+          Ruleset Engine v1.2.0
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-content">
+      <header class="app-header">
+        <div class="header-left">
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle navigation menu">☰</button>
+          <span style="font-weight: 700; color: var(--text-secondary); font-size: 0.95rem;">Knowledge Verification</span>
+        </div>
+        <div class="header-right">
+          <button id="theme-toggle-btn" class="btn btn-sm btn-outline" style="padding: 0.4rem;" aria-label="Toggle theme">☀️</button>
+          <div id="header-user-badge"></div>
+        </div>
+      </header>
+
+      <main class="container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Cybersecurity Knowledge Quizzes</h1>
+            <p class="page-subtitle">Assess your comprehension of domain hierarchies, HTTPS misconceptions, and redirection vectors.</p>
+          </div>
+          <div>
+            <select id="quiz-selector" class="form-control" style="min-width: 280px;"></select>
+          </div>
+        </div>
+
+        <!-- Quiz Question Card -->
+        <div id="quiz-questions-card" class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h2 id="quiz-title" style="font-size: 1.25rem;">Select a Quiz</h2>
+              <p id="quiz-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;"></p>
+            </div>
+            <span id="quiz-difficulty-tag" class="badge badge-low">BEGINNER</span>
+          </div>
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+              <span id="question-counter" style="font-size: 0.9rem; font-weight: 700; color: var(--accent-cyan);">-</span>
+              <span id="question-type-label" class="badge badge-neutral">-</span>
+            </div>
+
+            <h3 id="question-text" style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 1rem;"></h3>
+
+            <!-- Options Container -->
+            <div id="quiz-options-container" class="quiz-options"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+              <button id="prev-question-btn" class="btn btn-secondary">&larr; Previous</button>
+              <div>
+                <button id="next-question-btn" class="btn btn-primary">Next Question &rarr;</button>
+                <button id="submit-quiz-btn" class="btn btn-primary" style="display: none;">Submit Quiz for Evaluation</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Results Card -->
+        <div id="quiz-results-card" class="card" style="display: none; margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title">🏆 Quiz Assessment Complete</h3>
+          </div>
+          <div class="card-body" style="text-align: center; padding: 2.5rem 1.5rem;">
+            <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Final Score</div>
+            <div id="final-quiz-score" style="font-size: 3.5rem; font-weight: 900; margin: 0.5rem 0;">0%</div>
+            <p id="final-quiz-points" style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.5rem;"></p>
+            <button id="retry-quiz-btn" class="btn btn-primary">Retry Assessment</button>
+          </div>
+          <div class="card-footer" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+            <h4 style="font-size: 1rem;">Answer Explanations & Review</h4>
+            <div id="quiz-review-list"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/quiz.js"></script>
+</body>
+</html>
+

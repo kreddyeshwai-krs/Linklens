@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Link Lens</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="brand-logo">
+          <div class="brand-icon">🔍</div>
+          <span>Link Lens</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Tools</div>
+        <a href="/dashboard.html" class="nav-link active">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="nav-icon">🔬</span>
+          <span>URL Intelligence Lab</span>
+        </a>
+        <a href="/history.html" class="nav-link">
+          <span class="nav-icon">📜</span>
+          <span>Scan History</span>
+        </a>
+
+        <div class="nav-section-title">Learning & Practice</div>
+        <a href="/simulator.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Red Flag Simulator</span>
+        </a>
+        <a href="/quiz.html" class="nav-link">
+          <span class="nav-icon">📝</span>
+          <span>Quizzes & Assessment</span>
+        </a>
+        <a href="/progress.html" class="nav-link">
+          <span class="nav-icon">🏆</span>
+          <span>My Progress & Badges</span>
+        </a>
+
+        <div id="nav-admin-link" style="display: none; flex-direction: column;">
+          <div class="nav-section-title">Administration</div>
+          <a href="/admin.html" class="nav-link">
+            <span class="nav-icon">⚙️</span>
+            <span>Admin Center</span>
+          </a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+          Ruleset Engine v1.2.0
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="app-content">
+      <!-- Topbar Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle navigation menu">☰</button>
+          <span style="font-weight: 700; color: var(--text-secondary); font-size: 0.95rem;">Operations Center</span>
+        </div>
+        <div class="header-right">
+          <button id="theme-toggle-btn" class="btn btn-sm btn-outline" style="padding: 0.4rem;" aria-label="Toggle theme">☀️</button>
+          <div id="header-user-badge"></div>
+        </div>
+      </header>
+
+      <main class="container">
+        <!-- Welcome Section -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Welcome back, <span id="welcome-user-name">Analyst</span></h1>
+            <p class="page-subtitle">Track your recent URL intelligence scans and cyber defense learning milestones.</p>
+          </div>
+          <div>
+            <a href="/scanner.html" class="btn btn-primary">+ New URL Analysis</a>
+          </div>
+        </div>
+
+        <!-- Quick Scan Form -->
+        <div class="card" style="margin-bottom: 2rem; border-color: var(--accent-cyan-subtle); background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary));">
+          <div class="card-body">
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">⚡ Instant URL Risk Assessment</h3>
+            <form id="dashboard-quick-scan-form" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <input id="quick-scan-input" class="form-control" type="text" placeholder="https://login.example.com/verify-account" style="flex: 1; min-width: 280px;" required>
+              <button type="submit" class="btn btn-primary">Analyze URL</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Metrics Overview Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+          <div class="card" style="padding: 1.5rem;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Total Scans Executed</div>
+            <div id="stat-total-scans" style="font-size: 2.25rem; font-weight: 800; color: var(--accent-cyan); margin: 0.35rem 0;">0</div>
+            <a href="/history.html" style="font-size: 0.85rem;">View scan history &rarr;</a>
+          </div>
+          <div class="card" style="padding: 1.5rem;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Scenarios Solved</div>
+            <div id="stat-completed-scenarios" style="font-size: 2.25rem; font-weight: 800; color: var(--risk-low); margin: 0.35rem 0;">0 / 0</div>
+            <a href="/simulator.html" style="font-size: 0.85rem;">Practice scenarios &rarr;</a>
+          </div>
+          <div class="card" style="padding: 1.5rem;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Quizzes Passed</div>
+            <div id="stat-passed-quizzes" style="font-size: 2.25rem; font-weight: 800; color: var(--risk-moderate); margin: 0.35rem 0;">0 / 0</div>
+            <a href="/quiz.html" style="font-size: 0.85rem;">Take a quiz &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title">🎯 Overall Learning Progress</h3>
+            <span id="learning-progress-pct" style="font-weight: 700; color: var(--accent-cyan);">0% Completed</span>
+          </div>
+          <div class="card-body">
+            <div style="background-color: var(--bg-tertiary); border-radius: var(--radius-full); height: 12px; overflow: hidden; margin-bottom: 1rem;">
+              <div id="learning-progress-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); transition: width 0.5s ease-in-out;"></div>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-secondary);">
+              Master lookalike domains, misleading subdomains, and open redirect red flags in the Learning Simulator.
+            </p>
+          </div>
+        </div>
+
+        <!-- Recent Scans Table -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">🔍 Recent URL Analysis Activity</h3>
+            <a href="/history.html" class="btn btn-sm btn-outline">View All Scans</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Target Hostname</th>
+                  <th>Risk Assessment</th>
+                  <th>Timestamp</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="recent-scans-table-body">
+                <tr>
+                  <td colspan="4" style="text-align: center; padding: 2rem;">Loading scan activity...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>
+

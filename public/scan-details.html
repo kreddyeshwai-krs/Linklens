@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan Intelligence Report — Link Lens</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="brand-logo">
+          <div class="brand-icon">🔍</div>
+          <span>Link Lens</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Tools</div>
+        <a href="/dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="nav-icon">🔬</span>
+          <span>URL Intelligence Lab</span>
+        </a>
+        <a href="/history.html" class="nav-link">
+          <span class="nav-icon">📜</span>
+          <span>Scan History</span>
+        </a>
+
+        <div class="nav-section-title">Learning & Practice</div>
+        <a href="/simulator.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Red Flag Simulator</span>
+        </a>
+        <a href="/quiz.html" class="nav-link">
+          <span class="nav-icon">📝</span>
+          <span>Quizzes & Assessment</span>
+        </a>
+        <a href="/progress.html" class="nav-link">
+          <span class="nav-icon">🏆</span>
+          <span>My Progress & Badges</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+          Ruleset Engine v1.2.0
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-content">
+      <header class="app-header">
+        <div class="header-left">
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle navigation menu">☰</button>
+          <a href="/history.html" class="btn btn-sm btn-outline no-print">&larr; Back to History</a>
+        </div>
+        <div class="header-right no-print">
+          <button id="print-report-btn" class="btn btn-sm btn-primary">🖨️ Print / Save as PDF</button>
+          <button id="delete-scan-btn" class="btn btn-sm btn-danger">Delete Scan</button>
+          <button id="theme-toggle-btn" class="btn btn-sm btn-outline" style="padding: 0.4rem;" aria-label="Toggle theme">☀️</button>
+          <div id="header-user-badge"></div>
+        </div>
+      </header>
+
+      <main class="container">
+        <div id="scan-details-content" style="display: none;">
+          <!-- Printable Report Header -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+            <div>
+              <h1 style="font-size: 1.85rem; font-weight: 900;">Link Lens Security Assessment Report</h1>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Official Analysis Dossier &bull; Generated: <span id="report-timestamp">-</span>
+              </p>
+            </div>
+            <div style="text-align: right;">
+              <span class="mono-font" style="font-size: 0.8rem; color: var(--text-muted);">REPORT ID</span>
+              <p class="mono-font" id="report-scan-id" style="font-size: 0.85rem; color: var(--accent-cyan);">-</p>
+            </div>
+          </div>
+
+          <!-- Top Executive Summary Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Score & Classification</h3>
+                <span id="report-ruleset" class="badge badge-neutral">v1.2.0</span>
+              </div>
+              <div class="card-body" id="report-risk-dial"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Destination Identification</h3>
+              </div>
+              <div class="card-body" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Normalized Hostname</span>
+                  <p><strong id="report-hostname" class="mono-font" style="font-size: 1.05rem;">-</strong></p>
+                </div>
+                <div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Registrable Domain (PSL)</span>
+                  <p><strong id="report-domain" class="mono-font">-</strong></p>
+                </div>
+                <div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Confidence Level</span>
+                  <p><strong id="report-confidence">-</strong></p>
+                </div>
+                <div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Redacted Target URL</span>
+                  <p class="mono-font" id="report-redacted-url" style="font-size: 0.8rem; word-break: break-all; color: var(--text-secondary); background: var(--bg-primary); padding: 0.4rem; border-radius: var(--radius-sm);">-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Findings Section -->
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+              <h3 class="card-title">Detailed Risk Findings & Evidence Breakdown</h3>
+            </div>
+            <div class="card-body">
+              <div id="report-findings-list" class="findings-list"></div>
+            </div>
+          </div>
+
+          <!-- Report Disclaimer -->
+          <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 3rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+            <strong>Integrity Notice:</strong> This document represents a structural heuristic analysis generated by the Link Lens Engine. A low risk category signifies absence of prominent recognized red flag patterns rather than an absolute safety guarantee. Submitted credentials and tokens were redacted prior to archiving.
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/scan-details.js"></script>
+</body>
+</html>
+
